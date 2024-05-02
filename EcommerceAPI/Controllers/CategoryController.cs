@@ -1,11 +1,15 @@
 ﻿using ApplicationCore;
 using ApplicationCore.Model.Request;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EcommerceAPI.Controllers
 {
     [Route("api/[controller]")]
+    
     [ApiController]
     public class CategoryController : ControllerBase
     {
@@ -14,13 +18,13 @@ namespace EcommerceAPI.Controllers
         {
                 this.categoryServiceAsync = categoryServiceAsync;
         }
-
+        [Authorize (AuthenticationSchemes= JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet]
         public async Task<IActionResult> Get()
         { 
          return Ok(await categoryServiceAsync.GetAllCategoriesAsync());
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> Post(CategoryRequestModel categoryRequestModel)
         {

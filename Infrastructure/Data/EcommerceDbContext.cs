@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class EcommerceDbContext:DbContext
+    public class EcommerceDbContext:IdentityDbContext<ApplicationUser>
     {
         public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options):
             base(options)
